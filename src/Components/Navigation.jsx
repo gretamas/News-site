@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { AppBar, Avatar, Menu, MenuItem, ListItemIcon, Divider, IconButton, Tooltip, Container, Box } from '@mui/material';
 import { PersonAdd, Settings, Logout, Menu as MenuIcon, Person } from '@mui/icons-material';
 import { styled } from '@mui/system';
@@ -19,7 +19,7 @@ const DropdownMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-export default function AccountMenu() {
+function Navigation() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElMenu, setAnchorElMenu] = React.useState(null);
 
@@ -45,6 +45,7 @@ export default function AccountMenu() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+
   return (
     <AppBar position="static" sx={{ backgroundColor: 'white', color: 'black', height: '80px' }}>
       <Container maxWidth="xl" sx={{ height: '100%' }}>
@@ -68,9 +69,9 @@ export default function AccountMenu() {
               <>
                 <CustomMenuItem>Politics</CustomMenuItem>
                 <CustomMenuItem>Business</CustomMenuItem>
-                <CustomMenuItem>Sports</CustomMenuItem>
-                <CustomMenuItem>World</CustomMenuItem>
-                <CustomMenuItem>Travel</CustomMenuItem>
+                <CustomMenuItem >Sports</CustomMenuItem>
+                <CustomMenuItem >World</CustomMenuItem>
+                <CustomMenuItem >Travel</CustomMenuItem>
               </>
             )}
             <Tooltip title="Account settings">
@@ -87,7 +88,6 @@ export default function AccountMenu() {
             </Tooltip>
           </Box>
         </Box>
-        
         {/* User Menu */}
         <Menu
           anchorEl={anchorElUser}
@@ -153,7 +153,6 @@ export default function AccountMenu() {
             Logout
           </DropdownMenuItem>
         </Menu>
-        
         {/* Main Menu */}
         <Menu
           anchorEl={anchorElMenu}
@@ -186,14 +185,16 @@ export default function AccountMenu() {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <DropdownMenuItem onClick={handleCloseMenu}>Politics</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleCloseMenu}>Business</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleCloseMenu}>Sports</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleCloseMenu}>World</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleCloseMenu}>Travel</DropdownMenuItem>
+          <DropdownMenuItem>Politics</DropdownMenuItem>
+          <DropdownMenuItem>Business</DropdownMenuItem>
+          <DropdownMenuItem>Sports</DropdownMenuItem>
+          <DropdownMenuItem>World</DropdownMenuItem>
+          <DropdownMenuItem>Travel</DropdownMenuItem>
         </Menu>
       </Container>
     </AppBar>
   );
 }
 
+
+export default Navigation;

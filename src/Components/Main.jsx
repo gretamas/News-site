@@ -1,15 +1,107 @@
 import React, { useState, useEffect } from "react";
-import SecondaryNavigation from "./SecondaryNavigation";
-import Box from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 
+function Main() {
+  const [articles, setArticles] = useState([]);
+  const [displayCount, setDisplayCount] = useState(4); // Number of articles to display initially and incrementally
 
-function Main (){
-return(
- <Box>
-   <SecondaryNavigation/>
- </Box>
+  const fetchArticles = async () => {
+    try {
+      const response = await fetch(
+        `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=77a37f96b90143a487fc78bafb60bb94`
+      );
+      const data = await response.json();
+      if (data?.articles?.length) {
+        setArticles(data.articles);
+      }
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+    }
+  };
 
-)
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
+  const handleLoadMore = () => {
+    setDisplayCount((prevCount) => prevCount + 4); // Increase the display count by 4
+  };
+
+  return (
+    <Box>
+      <Box mt={2} mx="auto" maxWidth={600}>
+        <Grid container spacing={2}>
+          {articles.slice(0, displayCount).map((article, index) => (
+            <Grid item xs={12} sm={6} key={index}>
+              <Card>
+                {article.urlToImage && (
+                  <CardMedia
+                    component="img"
+                    height="210"
+                    image={article.urlToImage}
+                    alt={article.title}
+                  />
+                )}
+                <CardContent  sx={{ height: 200, overflow: "hidden" }}>
+                  <Typography
+                    variant="h6"
+                    gutterBottom
+                    sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                  >
+                    {article.title}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    gutterBottom
+                    sx={{ overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 3 }}
+                  >
+                    {article.description}
+                  </Typography>
+                  <Box display="flex" justifyContent="center" mt={3} mb={2}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => window.open(article.url, "_blank")}
+                  >
+                    READ MORE
+                  </Button>
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Typography variant="body2">{article.author}</Typography>
+                    <Typography variant="body2">
+                      {new Date(article.publishedAt).toDateString()}
+                    </Typography>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+      {displayCount < articles.length && (
+        <Box display="flex" justifyContent="center" mt={2}>
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={handleLoadMore}
+            sx={{ mt: 2 }}
+          >
+            SEE MORE
+          </Button>
+        </Box>
+      )}
+    </Box>
+  );
 }
 
 export default Main;

@@ -46,7 +46,7 @@ function BreakingNews() {
         }}
       >BREAKING NEWS
       </Button>
-      <Typography variant="body5" gutterBottom>
+      <Typography variant="body1" gutterBottom>
               {article.title}
             </Typography>
     </Box>

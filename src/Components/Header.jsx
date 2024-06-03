@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, IconButton, Card, CardContent, CardMedia } from '@mui/material';
+import { Box, Typography, IconButton, Card, CardContent, CardMedia} from '@mui/material';
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 
 function Header() {
-  const [article, setArticle] = useState("");
+  const [article, setArticle] = useState(null);
   const [isFavoriteActive, setIsFavoriteActive] = useState(false);
   const [isBookmarkActive, setIsBookmarkActive] = useState(false);
 
@@ -36,7 +36,7 @@ function Header() {
   return (
     <Box sx={{ padding: 10 }}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h5" sx={{color:'rgb(192, 20, 20)'}} >Trending</Typography>
+        <Typography variant="h5" sx={{ color: 'rgb(192, 20, 20)' }}>Trending</Typography>
         <Box>
           <IconButton onClick={handleFavoriteClick}>
             <FavoriteBorderOutlinedIcon sx={{ color: isFavoriteActive ? 'rgb(192, 20, 20)' : 'inherit' }} />
@@ -47,36 +47,35 @@ function Header() {
         </Box>
       </Box>
       {article && (
-        <Card>
-          <CardContent>
-            <Typography variant="h4" gutterBottom>
-              {article.title}
-            </Typography>
-          </CardContent>
-          <CardMedia
-            component="img"
-            height="500"
-            image={article.urlToImage}
-            alt={article.title}
-          />
-          <CardContent>
-            <Typography variant="body1" gutterBottom>
-              {article.description}
-            </Typography>
-            <Box display="flex" justifyContent="space-between" alignItems="center">
-              <Typography variant="body5">{article.author}</Typography>
-              <Typography variant="body2">
-                {new Date(article.publishedAt).toLocaleDateString()}
+        <>
+          <Card>
+            <CardContent>
+              <Typography variant="h4" gutterBottom>
+                {article.title}
               </Typography>
-            </Box>
-          </CardContent>
-        </Card>
+            </CardContent>
+            <CardMedia
+              component="img"
+              height="500"
+              image={article.urlToImage}
+              alt={article.title}
+            />
+            <CardContent>
+              <Typography variant="body1" gutterBottom>
+                {article.description}
+              </Typography>
+              <Box display="flex" justifyContent="space-between" alignItems="center">
+                <Typography variant="body2">{article.author}</Typography>
+                <Typography variant="body2">
+                  {new Date(article.publishedAt).toLocaleDateString()}
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
+        </>
       )}
     </Box>
   );
 }
 
 export default Header;
-
-
-
