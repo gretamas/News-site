@@ -3,6 +3,7 @@ import Navigation from "./Components/Navigation";
 import Header from "./Components/Header";
 import BreakingNews from "./Components/BreakingNews";
 import Main from "./Components/Main";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <BreakingNews />
       <Header />
       <Main />
+      <Footer/>
     </div>
   );
 }
