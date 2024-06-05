@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
+import "../Styles/BreakingNews.css"
 
 function BreakingNews() {
 
@@ -23,32 +24,23 @@ function BreakingNews() {
   }, []);
 
   return (
-    
-    <Box
+    <Box className="breaking-news">
+      <Button className="breaking-news__btn"
+      variant="contained"
       sx={{
-        backgroundColor: 'rgb(192, 20, 20)',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        columnGap: 10,
-        padding: 2
-      }}
-    >
-      <Button
-        variant="contained"
-        sx={{
+        backgroundColor: 'white',
+        color: 'rgb(192, 20, 20)',
+        '&:hover': {
           backgroundColor: 'white',
-          color: 'rgb(192, 20, 20)',
-          '&:hover': {
-            backgroundColor: 'white',
-          }
-        }}
-      >BREAKING NEWS
+        }
+      }}>
+        BREAKING NEWS
       </Button>
-      <Typography variant="body1" gutterBottom>
-              {article.title}
-            </Typography>
+      <Box className="breaking-news__text-wrapper">
+      <Typography variant="body1" className="breaking-news__text">
+      {article.title}
+    </Typography>
+      </Box>
     </Box>
   );
 }
