@@ -1,11 +1,11 @@
 .main-section {
   width: 100vw;
   display: flex;
-  column-gap: 20px;
   justify-content: center;
+  column-gap: 30px;
 }
 
-.main-section--mobile{
+.main-section--mobile {
   flex-direction: column;
   justify-content: center;
   align-items: center;

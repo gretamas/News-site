@@ -7,6 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { Divider } from "@mui/material";
+import { CardActionArea } from '@mui/material';
 import moment from 'moment';
 
 function Articles() {
@@ -16,7 +17,7 @@ function Articles() {
   const fetchArticles = async () => {
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=bitcoin&apiKey=77a37f96b90143a487fc78bafb60bb94`
+        `https://newsapi.org/v2/everything?q=bitcoin&apiKey=e1bef1f913474c1b9baf0a58a4147a5d`
       );
       const data = await response.json();
       if (data?.articles?.length) {
@@ -36,11 +37,11 @@ function Articles() {
   };
 
   return (
-    <Box>
-      <Box mt={2} mx="auto" maxWidth={600}>
-        <Grid container spacing={2}>
+      <Box maxWidth={700}>
+        <Grid container spacing={3}>
           {articles.slice(0, displayCount).map((article, index) => (
             <Grid item xs={12} sm={6} key={index}>
+               <CardActionArea> 
               <Card>
                 {article.urlToImage && (
                   <CardMedia
@@ -65,15 +66,6 @@ function Articles() {
                   >
                     {article.description}
                   </Typography>
-                  <Box display="flex" justifyContent="center" mt={3} mb={2}>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    onClick={() => window.open(article.url, "_blank")}
-                  >
-                    READ MORE
-                  </Button>
-                  </Box>
                   <Divider />
                   <Box
                     mt={1}
@@ -88,23 +80,23 @@ function Articles() {
                   </Box>
                 </CardContent>
               </Card>
+              </CardActionArea> 
             </Grid>
           ))}
         </Grid>
-      </Box>
-      {displayCount < articles.length && (
+        {displayCount < articles.length && (
         <Box display="flex" justifyContent="center" mt={2}>
           <Button
             variant="outlined"
             size="large"
             onClick={handleLoadMore}
-            sx={{ mt: 2 }}
+            sx={{ mt: 2,  borderColor: '#c31815', color: '#c31815', "&:hover": {borderColor: '#c31815', backgroundColor: '#f6e7e7', transform: 'scale(1.05)'}}}
           >
             SEE MORE
           </Button>
         </Box>
       )}
-    </Box>
+      </Box>
   );
 }
 

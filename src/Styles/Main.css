@@ -1,9 +1,9 @@
 .main-section {
   width: 100vw;
   display: flex;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
   justify-content: center;
+  -moz-column-gap: 30px;
+       column-gap: 30px;
 }
 
 .main-section--mobile {

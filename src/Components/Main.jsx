@@ -12,8 +12,8 @@ function Main(){
 
     return(
      <Box className = {isMobile ? "main-section--mobile" : "main-section"}>
-<Articles/>
-<LocationNews/>
+<Articles className="main-section__articles"/>
+<LocationNews className="main-section__location-input"/>
      </Box>
     )
 }
