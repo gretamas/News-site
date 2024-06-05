@@ -7,6 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { Divider } from "@mui/material";
+import { CardActionArea } from '@mui/material';
 import moment from 'moment';
 
 function Articles() {
@@ -41,7 +42,7 @@ function Articles() {
         <Grid container spacing={2}>
           {articles.slice(0, displayCount).map((article, index) => (
             <Grid item xs={12} sm={6} key={index}>
-              <Card sx={{width: 440, height: 520}}>
+              <Card sx={{width: 440, height: 520}} onClick={() => window.open(article.url, "_blank")}>
                 {article.urlToImage && (
                   <CardMedia
                     component="img"
@@ -50,33 +51,23 @@ function Articles() {
                     alt={article.title}
                   />
                 )}
-                <CardContent  sx={{ height: 300, overflow: "hidden" }}>
+                <CardContent  sx={{ height: 300 }}>
                   <Typography
                     variant="h6"
                     gutterBottom
-                    sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                    sx={{ overflow: "hidden", whiteSpace: "nowrap" }}
                   >
                     {article.title}
                   </Typography>
                   <Typography
                     variant="body1"
                     gutterBottom
-                    sx={{ overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 3 }}
                   >
                     {article.description}
                   </Typography>
-                  <Box display="flex" justifyContent="center" mt={3} mb={2}>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    onClick={() => window.open(article.url, "_blank")}
-                  >
-                    READ MORE
-                  </Button>
-                  </Box>
-                  <Divider />
+                  <Divider/>
                   <Box
-                    mt={1}
+                    mt={3}
                     display="flex"
                     justifyContent="space-between"
                     alignItems="center"
@@ -93,12 +84,12 @@ function Articles() {
         </Grid>
       </Box>
       {displayCount < articles.length && (
-        <Box display="flex" justifyContent="center" mt={2}>
+        <Box display="flex" justifyContent="center" mt={3}>
           <Button
             variant="outlined"
             size="large"
             onClick={handleLoadMore}
-            sx={{ mt: 2 }}
+            sx={{borderColor: '#c31815', color: '#c31815', "&:hover": {borderColor: '#c31815', backgroundColor: '#f6e7e7', transform: 'scale(1.05)'}}}
           >
             SEE MORE
           </Button>

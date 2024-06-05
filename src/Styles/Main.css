@@ -4,4 +4,10 @@
   -moz-column-gap: 20px;
        column-gap: 20px;
   justify-content: center;
+}
+
+.main-section--mobile {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }/*# sourceMappingURL=Main.css.map */
