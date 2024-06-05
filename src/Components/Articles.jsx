@@ -36,21 +36,21 @@ function Articles() {
   };
 
   return (
-    <Box>
-      <Box mt={2} mx="auto" maxWidth={600}>
+    <Box maxWidth={950} >
+      <Box>
         <Grid container spacing={2}>
           {articles.slice(0, displayCount).map((article, index) => (
             <Grid item xs={12} sm={6} key={index}>
-              <Card>
+              <Card sx={{width: 440, height: 520}}>
                 {article.urlToImage && (
                   <CardMedia
                     component="img"
-                    height="210"
+                    height="270"
                     image={article.urlToImage}
                     alt={article.title}
                   />
                 )}
-                <CardContent  sx={{ height: 200, overflow: "hidden" }}>
+                <CardContent  sx={{ height: 300, overflow: "hidden" }}>
                   <Typography
                     variant="h6"
                     gutterBottom

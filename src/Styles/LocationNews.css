@@ -1,7 +1,7 @@
 .location-news {
   background-color: white;
-  width: 370px;
-  height: 250px;
+  width: 350px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;

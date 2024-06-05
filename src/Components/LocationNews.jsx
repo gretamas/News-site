@@ -1,7 +1,6 @@
 import React from "react";
-import { Box, Card, Button, Typography, InputLabel, TextField} from "@mui/material";
+import {Card, Button, Typography, TextField} from "@mui/material";
 import "../Styles/LocationNews.css"
-import { Scale } from "@mui/icons-material";
 
 function LocationNews (){
     return(
@@ -15,7 +14,7 @@ function LocationNews (){
           sx={{"&:focus": {color: '#c31815'}}}
         />
           <Button className="location-news__btn" variant="outlined" sx={{ borderColor: '#c31815', color: '#c31815', "&:hover": {borderColor: '#c31815', backgroundColor: '#f6e7e7', transform: 'scale(1.05)'}}}>
-          SEARCH
+          SUBMIT
         </Button>
         </Card>  
     )
