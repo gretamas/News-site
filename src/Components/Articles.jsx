@@ -7,7 +7,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { Divider } from "@mui/material";
-import { CardActionArea } from '@mui/material';
 import moment from 'moment';
 
 function Articles() {
@@ -37,37 +36,47 @@ function Articles() {
   };
 
   return (
-    <Box maxWidth={950} >
-      <Box>
+    <Box>
+      <Box mt={2} mx="auto" maxWidth={600}>
         <Grid container spacing={2}>
           {articles.slice(0, displayCount).map((article, index) => (
             <Grid item xs={12} sm={6} key={index}>
-              <Card sx={{width: 440, height: 520}} onClick={() => window.open(article.url, "_blank")}>
+              <Card>
                 {article.urlToImage && (
                   <CardMedia
                     component="img"
-                    height="270"
+                    height="210"
                     image={article.urlToImage}
                     alt={article.title}
                   />
                 )}
-                <CardContent  sx={{ height: 300 }}>
+                <CardContent  sx={{ height: 200, overflow: "hidden" }}>
                   <Typography
                     variant="h6"
                     gutterBottom
-                    sx={{ overflow: "hidden", whiteSpace: "nowrap" }}
+                    sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
                   >
                     {article.title}
                   </Typography>
                   <Typography
                     variant="body1"
                     gutterBottom
+                    sx={{ overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 3 }}
                   >
                     {article.description}
                   </Typography>
-                  <Divider/>
+                  <Box display="flex" justifyContent="center" mt={3} mb={2}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => window.open(article.url, "_blank")}
+                  >
+                    READ MORE
+                  </Button>
+                  </Box>
+                  <Divider />
                   <Box
-                    mt={3}
+                    mt={1}
                     display="flex"
                     justifyContent="space-between"
                     alignItems="center"
@@ -84,12 +93,12 @@ function Articles() {
         </Grid>
       </Box>
       {displayCount < articles.length && (
-        <Box display="flex" justifyContent="center" mt={3}>
+        <Box display="flex" justifyContent="center" mt={2}>
           <Button
             variant="outlined"
             size="large"
             onClick={handleLoadMore}
-            sx={{borderColor: '#c31815', color: '#c31815', "&:hover": {borderColor: '#c31815', backgroundColor: '#f6e7e7', transform: 'scale(1.05)'}}}
+            sx={{ mt: 2 }}
           >
             SEE MORE
           </Button>

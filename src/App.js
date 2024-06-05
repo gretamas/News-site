@@ -12,7 +12,7 @@ function App() {
       <Navigation />
       <BreakingNews />
       <Header />
-     <Main/>
+      <Main />
       <Footer />
     </div>
   );
