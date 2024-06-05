@@ -9,7 +9,7 @@ import Grid from "@mui/material/Grid";
 import { Divider } from "@mui/material";
 import moment from 'moment';
 
-function Main() {
+function Articles() {
   const [articles, setArticles] = useState([]);
   const [displayCount, setDisplayCount] = useState(4); 
 
@@ -108,4 +108,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Articles;

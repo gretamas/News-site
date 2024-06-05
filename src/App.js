@@ -2,8 +2,10 @@ import React from "react";
 import Navigation from "./Components/Navigation";
 import Header from "./Components/Header";
 import BreakingNews from "./Components/BreakingNews";
-import Main from "./Components/Main";
+import Articles from "./Components/Articles";
 import Footer from "./Components/Footer";
+import LocationNews from "./Components/LocationNews";
+import "./Styles/App.css";
 
 function App() {
   return (
@@ -11,8 +13,9 @@ function App() {
       <Navigation />
       <BreakingNews />
       <Header />
-      <Main />
-      <Footer/>
+      <Articles />
+      <LocationNews />
+      <Footer />
     </div>
   );
 }

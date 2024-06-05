@@ -1,0 +1,25 @@
+.location-news {
+  background-color: white;
+  width: 370px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 25px;
+
+  .location-news__title {
+    color: #c31815;
+    align-items: flex-start;
+    margin-left: 20px;
+  }
+
+  .location-news__input {
+    width: 300px;
+    margin-left: 20px;
+  }
+
+  .location-news__btn {
+    width: 200px;
+    margin: 0px auto;
+  }
+}
