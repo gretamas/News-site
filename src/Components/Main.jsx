@@ -6,6 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import "../Styles/Main.css"
 
+
 function Main(){
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
