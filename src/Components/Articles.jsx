@@ -8,29 +8,34 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { Divider } from "@mui/material";
 import { CardActionArea } from '@mui/material';
+import countryCodes from "./CountryCodes";
+
 import moment from 'moment';
 
-function Articles() {
+function Articles({ location }) {
   const [articles, setArticles] = useState([]);
   const [displayCount, setDisplayCount] = useState(4); 
 
-  const fetchArticles = async () => {
-    try {
-      const response = await fetch(
-        `https://newsapi.org/v2/everything?q=health&apiKey=e1bef1f913474c1b9baf0a58a4147a5d`
-      );
-      const data = await response.json();
-      if (data?.articles?.length) {
-        setArticles(data.articles);
-      }
-    } catch (error) {
-      console.error("Error fetching articles:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const countryCode = Object.keys(countryCodes).find(code => countryCodes[code].toLowerCase() === location.toLowerCase()) || 'us'; 
+        
+        const response = await fetch(
+          `https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=77a37f96b90143a487fc78bafb60bb94`
+        );
+        const data = await response.json();
+        if (data?.articles?.length) {
+          const filteredArticles = data.articles.filter(article => article.urlToImage);
+          setArticles(filteredArticles);
+        }
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      }
+    };
+
     fetchArticles();
-  }, []);
+  }, [location]); 
 
   const handleLoadMore = () => {
     setDisplayCount((prevCount) => prevCount + 4); 
