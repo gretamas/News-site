@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AppBar, Avatar, Menu, MenuItem, ListItemIcon, Divider, IconButton, Tooltip, Container, Box } from '@mui/material';
 import { PersonAdd, Settings, Logout, Menu as MenuIcon, Person } from '@mui/icons-material';
 import { styled } from '@mui/system';
@@ -19,9 +19,9 @@ const DropdownMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-function Navigation() {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [anchorElMenu, setAnchorElMenu] = React.useState(null);
+function Navigation({ onMenuClick }) {
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElMenu, setAnchorElMenu] = useState(null);
 
   const openUser = Boolean(anchorElUser);
   const openMenu = Boolean(anchorElMenu);
@@ -45,7 +45,6 @@ function Navigation() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-
   return (
     <AppBar position="static" sx={{ backgroundColor: 'white', color: 'black', height: '80px' }}>
       <Container maxWidth="xl" sx={{ height: '100%' }}>
@@ -67,11 +66,11 @@ function Navigation() {
               </Tooltip>
             ) : (
               <>
-                <CustomMenuItem>Politics</CustomMenuItem>
-                <CustomMenuItem>Business</CustomMenuItem>
-                <CustomMenuItem >Sports</CustomMenuItem>
-                <CustomMenuItem >World</CustomMenuItem>
-                <CustomMenuItem >Travel</CustomMenuItem>
+                <CustomMenuItem onClick={onMenuClick}>Politics</CustomMenuItem>
+                <CustomMenuItem onClick={onMenuClick}>Business</CustomMenuItem>
+                <CustomMenuItem onClick={onMenuClick}>Sports</CustomMenuItem>
+                <CustomMenuItem onClick={onMenuClick}>World</CustomMenuItem>
+                <CustomMenuItem onClick={onMenuClick}>Travel</CustomMenuItem>
               </>
             )}
             <Tooltip title="Account settings">
@@ -127,10 +126,7 @@ function Navigation() {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <DropdownMenuItem onClick={handleCloseUser}>
-            <Avatar /> Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleCloseUser}>
+          <DropdownMenuItem onClick={handleCloseUser} >
             <Avatar /> My account
           </DropdownMenuItem>
           <Divider />
@@ -185,16 +181,15 @@ function Navigation() {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <DropdownMenuItem>Politics</DropdownMenuItem>
-          <DropdownMenuItem>Business</DropdownMenuItem>
-          <DropdownMenuItem>Sports</DropdownMenuItem>
-          <DropdownMenuItem>World</DropdownMenuItem>
-          <DropdownMenuItem>Travel</DropdownMenuItem>
+          <DropdownMenuItem onClick={onMenuClick}>Politics</DropdownMenuItem>
+          <DropdownMenuItem onClick={onMenuClick}>Business</DropdownMenuItem>
+          <DropdownMenuItem onClick={onMenuClick}>Sports</DropdownMenuItem>
+          <DropdownMenuItem onClick={onMenuClick}>World</DropdownMenuItem>
+          <DropdownMenuItem onClick={onMenuClick}>Travel</DropdownMenuItem>
         </Menu>
       </Container>
     </AppBar>
   );
 }
-
 
 export default Navigation;

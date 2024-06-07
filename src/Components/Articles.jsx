@@ -22,7 +22,7 @@ function Articles({ location }) {
         const countryCode = Object.keys(countryCodes).find(code => countryCodes[code].toLowerCase() === location.toLowerCase()) || 'us'; 
         
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=77a37f96b90143a487fc78bafb60bb94`
+          `https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=e1bef1f913474c1b9baf0a58a4147a5d`
         );
         const data = await response.json();
         if (data?.articles?.length) {

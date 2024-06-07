@@ -8,13 +8,18 @@ import Picks from "./Components/Picks";
 import "./Styles/App.css";
 
 function App() {
+  const executeScroll = () => {
+    const mainSection = document.getElementById("main-section");
+    mainSection.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div>
-      <Navigation />
+      <Navigation onMenuClick={executeScroll} />
       <BreakingNews />
       <Header />
       <Main />
-      <Picks/>
+      <Picks />
       <Footer />
     </div>
   );
