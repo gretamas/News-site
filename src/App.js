@@ -12,14 +12,14 @@ function App() {
 
   function handleCategoryClick(newCategory) {
     setCategory(newCategory);
- }
+  }
 
   return (
     <div>
       <Navigation handleCategoryClick={handleCategoryClick} />
       <BreakingNews />
       <Header />
-      <Main category={category}/>
+      <Main category={category} />
       <Picks />
       <Footer />
     </div>
