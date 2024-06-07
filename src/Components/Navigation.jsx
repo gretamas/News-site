@@ -20,10 +20,12 @@ const DropdownMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-function Navigation() {
+function Navigation({handleCategoryClick}){
+
+  
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElMenu, setAnchorElMenu] = React.useState(null);
-
+  
   const openUser = Boolean(anchorElUser);
   const openMenu = Boolean(anchorElMenu);
 
@@ -43,8 +45,16 @@ function Navigation() {
     setAnchorElMenu(null);
   };
 
+  const handleDropDownMenu = (category) => {
+    handleCategoryClick(category);
+    setAnchorElMenu(null);
+  }
+
+
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
 
   return (
     <AppBar position="static" sx={{ backgroundColor: 'white', color: 'black', height: '80px' }}>
@@ -68,19 +78,19 @@ function Navigation() {
             ) : (
               <>
                 <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <CustomMenuItem>Politics</CustomMenuItem>
+                  <CustomMenuItem onClick={() => handleCategoryClick('politics')}>Politics</CustomMenuItem>
                 </ScrollLink>
                 <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <CustomMenuItem>Business</CustomMenuItem>
+                  <CustomMenuItem onClick={() => handleCategoryClick('business')}>Business</CustomMenuItem>
                 </ScrollLink>
                 <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <CustomMenuItem>Sports</CustomMenuItem>
+                  <CustomMenuItem onClick={() => handleCategoryClick('sports')}>Sports</CustomMenuItem>
                 </ScrollLink>
                 <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <CustomMenuItem>World</CustomMenuItem>
+                  <CustomMenuItem onClick={() => handleCategoryClick('health')}>Health</CustomMenuItem>
                 </ScrollLink>
                 <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <CustomMenuItem>Travel</CustomMenuItem>
+                  <CustomMenuItem onClick={() => handleCategoryClick('entertainment')}>Entertainment</CustomMenuItem>
                 </ScrollLink>
               </>
             )}
@@ -195,31 +205,21 @@ function Navigation() {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <DropdownMenuItem>
-            <ScrollLink to="articles-section" smooth={true} duration={500}>
-              Politics
-            </ScrollLink>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <ScrollLink to="articles-section" smooth={true} duration={500}>
-              Business
-            </ScrollLink>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <ScrollLink to="articles-section" smooth={true} duration={500}>
-              Sports
-            </ScrollLink>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <ScrollLink to="articles-section" smooth={true} duration={500}>
-              World
-            </ScrollLink>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <ScrollLink to="articles-section" smooth={true} duration={500}>
-              Travel
-            </ScrollLink>
-          </DropdownMenuItem>
+          <ScrollLink to="articles-section" smooth={true} duration={500}>
+                  <DropdownMenuItem onClick={() => handleDropDownMenu('politics')}>Politics</DropdownMenuItem>
+                </ScrollLink>
+                <ScrollLink to="articles-section" smooth={true} duration={500}>
+                  <DropdownMenuItem onClick={() => handleDropDownMenu('business')}>Business</DropdownMenuItem>
+                </ScrollLink>
+                <ScrollLink to="articles-section" smooth={true} duration={500}>
+                  <DropdownMenuItem onClick={() => handleDropDownMenu('sports')}>Sports</DropdownMenuItem>
+                </ScrollLink>
+                <ScrollLink to="articles-section" smooth={true} duration={500}>
+                  <DropdownMenuItem onClick={() => handleDropDownMenu('health')}>Health</DropdownMenuItem>
+                </ScrollLink>
+                <ScrollLink to="articles-section" smooth={true} duration={500}>
+                  <DropdownMenuItem onClick={() => handleDropDownMenu('entertainment')}>Entertainment</DropdownMenuItem>
+                </ScrollLink>
         </Menu>
       </Container>
     </AppBar>

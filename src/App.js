@@ -8,13 +8,19 @@ import Picks from "./Components/Picks";
 import "./Styles/App.css";
 
 function App() {
+  const [category, setCategory] = React.useState("sports");
+
+  function handleCategoryClick(newCategory) {
+    setCategory(newCategory);
+ }
+
   return (
     <div>
-      <Navigation />
+      <Navigation handleCategoryClick={handleCategoryClick} />
       <BreakingNews />
       <Header />
-      <Main />
-      <Picks/>
+      <Main category={category}/>
+      <Picks />
       <Footer />
     </div>
   );

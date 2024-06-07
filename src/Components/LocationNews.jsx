@@ -12,6 +12,7 @@ function LocationNews ({ onLocationChange }){
 
   const handleSubmit = () => {
     onLocationChange(location);
+    setLocation("");
   }
 
     return(

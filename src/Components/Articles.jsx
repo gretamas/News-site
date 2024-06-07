@@ -9,10 +9,9 @@ import Grid from "@mui/material/Grid";
 import { Divider } from "@mui/material";
 import { CardActionArea } from '@mui/material';
 import countryCodes from "./CountryCodes";
-
 import moment from 'moment';
 
-function Articles({ location }) {
+function Articles({ location, category}) {
   const [articles, setArticles] = useState([]);
   const [displayCount, setDisplayCount] = useState(4); 
 
@@ -21,13 +20,14 @@ function Articles({ location }) {
       try {
         const countryCode = Object.keys(countryCodes).find(code => countryCodes[code].toLowerCase() === location.toLowerCase()) || 'us'; 
         
-        const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=77a37f96b90143a487fc78bafb60bb94`
-        );
+        const url= `https://newsapi.org/v2/top-headlines?country=${countryCode}&category=${category}&apiKey=e1bef1f913474c1b9baf0a58a4147a5d`
+      
+        const response = await fetch(url);
         const data = await response.json();
         if (data?.articles?.length) {
           const filteredArticles = data.articles.filter(article => article.urlToImage);
           setArticles(filteredArticles);
+          setDisplayCount(4);
         }
       } catch (error) {
         console.error("Error fetching articles:", error);
@@ -35,7 +35,7 @@ function Articles({ location }) {
     };
 
     fetchArticles();
-  }, [location]); 
+  }, [location, category]); 
 
   const handleLoadMore = () => {
     setDisplayCount((prevCount) => prevCount + 4); 
