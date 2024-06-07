@@ -4,6 +4,7 @@ import { PersonAdd, Settings, Logout, Menu as MenuIcon, Person } from '@mui/icon
 import { styled } from '@mui/system';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { Link as ScrollLink } from 'react-scroll';
 import logo from "../images/logo.svg";
 
 const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
@@ -45,7 +46,6 @@ function Navigation() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-
   return (
     <AppBar position="static" sx={{ backgroundColor: 'white', color: 'black', height: '80px' }}>
       <Container maxWidth="xl" sx={{ height: '100%' }}>
@@ -67,11 +67,21 @@ function Navigation() {
               </Tooltip>
             ) : (
               <>
-                <CustomMenuItem>Politics</CustomMenuItem>
-                <CustomMenuItem>Business</CustomMenuItem>
-                <CustomMenuItem >Sports</CustomMenuItem>
-                <CustomMenuItem >World</CustomMenuItem>
-                <CustomMenuItem >Travel</CustomMenuItem>
+                <ScrollLink to="articles-section" smooth={true} duration={500}>
+                  <CustomMenuItem>Politics</CustomMenuItem>
+                </ScrollLink>
+                <ScrollLink to="articles-section" smooth={true} duration={500}>
+                  <CustomMenuItem>Business</CustomMenuItem>
+                </ScrollLink>
+                <ScrollLink to="articles-section" smooth={true} duration={500}>
+                  <CustomMenuItem>Sports</CustomMenuItem>
+                </ScrollLink>
+                <ScrollLink to="articles-section" smooth={true} duration={500}>
+                  <CustomMenuItem>World</CustomMenuItem>
+                </ScrollLink>
+                <ScrollLink to="articles-section" smooth={true} duration={500}>
+                  <CustomMenuItem>Travel</CustomMenuItem>
+                </ScrollLink>
               </>
             )}
             <Tooltip title="Account settings">
@@ -185,16 +195,35 @@ function Navigation() {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <DropdownMenuItem>Politics</DropdownMenuItem>
-          <DropdownMenuItem>Business</DropdownMenuItem>
-          <DropdownMenuItem>Sports</DropdownMenuItem>
-          <DropdownMenuItem>World</DropdownMenuItem>
-          <DropdownMenuItem>Travel</DropdownMenuItem>
+          <DropdownMenuItem>
+            <ScrollLink to="articles-section" smooth={true} duration={500}>
+              Politics
+            </ScrollLink>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <ScrollLink to="articles-section" smooth={true} duration={500}>
+              Business
+            </ScrollLink>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <ScrollLink to="articles-section" smooth={true} duration={500}>
+              Sports
+            </ScrollLink>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <ScrollLink to="articles-section" smooth={true} duration={500}>
+              World
+            </ScrollLink>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <ScrollLink to="articles-section" smooth={true} duration={500}>
+              Travel
+            </ScrollLink>
+          </DropdownMenuItem>
         </Menu>
       </Container>
     </AppBar>
   );
 }
-
 
 export default Navigation;

@@ -17,7 +17,7 @@ function Main(){
       };
 
     return(
-     <Box className = {isMobile ? "main-section--mobile" : "main-section"}>
+     <Box id="articles-section" className = {isMobile ? "main-section--mobile" : "main-section"}>
 <Articles location={location} className="main-section__articles"/>
 <LocationNews onLocationChange={handleLocationChange} className="main-section__location-input"/>
      </Box>
