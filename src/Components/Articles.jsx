@@ -20,7 +20,7 @@ function Articles({ location, category}) {
       try {
         const countryCode = Object.keys(countryCodes).find(code => countryCodes[code].toLowerCase() === location.toLowerCase()) || 'us'; 
         
-        const url= `https://newsapi.org/v2/top-headlines?country=${countryCode}&category=${category}&apiKey=e1bef1f913474c1b9baf0a58a4147a5d`
+        const url= `https://newsapi.org/v2/top-headlines?country=${countryCode}&category=${category}&apiKey=77a37f96b90143a487fc78bafb60bb94`
       
         const response = await fetch(url);
         const data = await response.json();

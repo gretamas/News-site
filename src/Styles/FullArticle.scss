@@ -1,0 +1,12 @@
+.full-article-section {
+  .full-article__background {
+    height: 410px;
+    //width: 100vw;
+    background-color: #0e1e32;
+    z-index: 0;
+  }
+  .full-article__subtitle{
+    border-top: 1px solid #c31815;
+    border-bottom: 1px solid #c31815;
+  }
+}

@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "watch:scss": "node-sass -w ./src/Styles/LocationNews.scss ./src/Styles/LocationNews.css, node-sass -w ./src/Styles/Main.scss ./src/Styles/Main.css"
+    "watch:scss": "node-sass -w ./src/Styles/LocationNews.scss ./src/Styles/LocationNews.css, node-sass -w ./src/Styles/Main.scss ./src/Styles/Main.css, node-sass -w ./src/Styles/FullArticle.scss ./src/Styles/FullArticle.css"
   },
   "eslintConfig": {
     "extends": [
