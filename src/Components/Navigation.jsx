@@ -5,6 +5,7 @@ import { styled } from '@mui/system';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { Link as ScrollLink } from 'react-scroll';
+import { Link } from 'react-router-dom';
 import logo from "../images/logo.svg";
 
 const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
@@ -20,7 +21,7 @@ const DropdownMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-function Navigation({handleCategoryClick}){
+function Navigation({handleCategoryClick, handleLogOut}){
 
   
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -50,6 +51,10 @@ function Navigation({handleCategoryClick}){
     setAnchorElMenu(null);
   }
 
+  const handleLogOutBtn = () => {
+    handleLogOut();
+    handleCloseMenu();
+  }
 
 
   const theme = useTheme();
@@ -148,13 +153,10 @@ function Navigation({handleCategoryClick}){
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
           <DropdownMenuItem onClick={handleCloseUser}>
-            <Avatar /> Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleCloseUser}>
             <Avatar /> My account
           </DropdownMenuItem>
           <Divider />
-          <DropdownMenuItem onClick={handleCloseUser}>
+          <DropdownMenuItem component={Link} to="/signup" onClick={handleCloseUser}>
             <ListItemIcon>
               <PersonAdd fontSize="small" />
             </ListItemIcon>
@@ -166,7 +168,7 @@ function Navigation({handleCategoryClick}){
             </ListItemIcon>
             Settings
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleCloseUser}>
+          <DropdownMenuItem onClick={handleLogOutBtn}>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
