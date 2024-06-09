@@ -1,34 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Box, Container, Typography } from "@mui/material";
+import React from "react";
+import { Box, Button, Container, Typography } from "@mui/material";
 import "../Styles/FullArticle.css"
 
-function FullArticle() {
-  const [article, setArticle] = useState(null);
-
-  useEffect(() => {
-    const fetchArticle = async () => {
-      try {
-        const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=77a37f96b90143a487fc78bafb60bb94`
-        );
-        const data = await response.json();
-        if (data?.articles?.length) {
-          setArticle(data.articles[0]);
-        }
-      } catch (error) {
-        console.error("Error fetching article:", error);
-      }
-    };
-    fetchArticle();
-  }, []);
-
+function FullArticle({ article, onBack }) {
   if (!article) {
     return <Typography>Loading...</Typography>;
   }
 
   return (
-
     <Container className="full-article-section" >
+      <Button onClick={onBack} variant="outlined" sx={{ mb: 2, borderColor: '#c31815', color: '#c31815', "&:hover": { borderColor: '#c31815', backgroundColor: '#f6e7e7' } }}>
+        Back to Articles
+      </Button>
     <Box className="full-article__background" sx={{ py: 4 }}></Box>
       <Box className="full-article__content" sx={{ position: 'relative', zIndex: 1, mt: -40, p: 3}}>
         <Typography variant="h3" sx={{ mb: 2, color: 'white'}}>

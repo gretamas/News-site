@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 
-function BreakingNews() {
+function BreakingNews({onArticleClick}) {
 
   const [article, setArticle] = useState("");
 
@@ -36,6 +36,7 @@ function BreakingNews() {
       }}
     >
       <Button
+        onClick={() => onArticleClick(article)}
         variant="contained"
         sx={{
           backgroundColor: 'white',

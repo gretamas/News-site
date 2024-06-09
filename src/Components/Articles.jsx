@@ -11,7 +11,7 @@ import { CardActionArea } from '@mui/material';
 import countryCodes from "./CountryCodes";
 import moment from 'moment';
 
-function Articles({ location, category}) {
+function Articles({ location, category, onArticleClick}) {
   const [articles, setArticles] = useState([]);
   const [displayCount, setDisplayCount] = useState(4); 
 
@@ -46,7 +46,7 @@ function Articles({ location, category}) {
         <Grid container spacing={3}>
           {articles.slice(0, displayCount).map((article, index) => (
             <Grid item xs={12} sm={6} key={index}>
-               <CardActionArea> 
+               <CardActionArea onClick={() => onArticleClick(article)}> 
               <Card>
                 {article.urlToImage && (
                   <CardMedia

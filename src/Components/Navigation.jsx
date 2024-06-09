@@ -21,7 +21,7 @@ const DropdownMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-function Navigation({handleCategoryClick, handleLogOut}){
+function Navigation({handleCategoryClick, handleLogOut, onBack}){
 
   
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -47,6 +47,7 @@ function Navigation({handleCategoryClick, handleLogOut}){
   };
 
   const handleDropDownMenu = (category) => {
+    onBack();
     handleCategoryClick(category);
     setAnchorElMenu(null);
   }
@@ -65,7 +66,9 @@ function Navigation({handleCategoryClick, handleLogOut}){
     <AppBar position="static" sx={{ backgroundColor: 'white', color: 'black', height: '80px' }}>
       <Container maxWidth="xl" sx={{ height: '100%' }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%' }}>
+          <Link onClick={onBack}>
           <img src={logo} alt="Logo" style={{ height: 40 }} />
+          </Link>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             {isMobile ? (
               <Tooltip title="Menu">
@@ -82,7 +85,7 @@ function Navigation({handleCategoryClick, handleLogOut}){
               </Tooltip>
             ) : (
               <>
-                <ScrollLink to="articles-section" smooth={true} duration={500}>
+                <ScrollLink  to="articles-section" smooth={true} duration={500}>
                   <CustomMenuItem onClick={() => handleCategoryClick('politics')}>Politics</CustomMenuItem>
                 </ScrollLink>
                 <ScrollLink to="articles-section" smooth={true} duration={500}>

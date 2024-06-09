@@ -19,8 +19,10 @@ import "./Styles/App.css";
 function App() {
   const [category, setCategory] = React.useState("sports");
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [fullArticle, setFullArticle] = React.useState(null);
 
   function handleCategoryClick(newCategory) {
+    handleBackToMain();
     setCategory(newCategory);
   }
 
@@ -32,6 +34,14 @@ function App() {
   function handleLogOut() {
     setIsLoggedIn(false);
   }
+
+  function handleFullArticleClick(article) {
+    setFullArticle(article);
+  }
+
+  const handleBackToMain = () => {
+    setFullArticle(null);
+  };
 
   return (
     <Router>
@@ -46,13 +56,19 @@ function App() {
                 <Navigation
                   handleCategoryClick={handleCategoryClick}
                   handleLogOut={handleLogOut}
+                  onBack={handleBackToMain}
                 />
-                <BreakingNews />
-                <Header />
-                <Main category={category} />
-                <Picks />
+                {fullArticle ? (
+                  <FullArticle article={fullArticle} onBack={handleBackToMain} />
+                ) : (
+                  <>
+                    <BreakingNews onArticleClick={handleFullArticleClick} />
+                    <Header />
+                    <Main category={category} onArticleClick={handleFullArticleClick}/>
+                    <Picks />
+                  </>
+                )}
                 <Footer />
-                <FullArticle/>
               </div>
             ) : (
               <Navigate to="/login" />
