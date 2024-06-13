@@ -30,6 +30,12 @@ return(
     rowGap: isMobile ? 3 : 0,
     padding: 2
   }}>
+    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 1}}>
+    <img src={logoBW} alt="Logo" style={{ height: 40 }} />
+    <Typography variant="body2">
+    copyright {copyright} 2024 | NBC NEWS
+    </Typography>
+    </Box>
     <Box>
         <Box sx={{display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'center' : 'space-around', columnGap: 2}}>
     <Typography>About Us</Typography>
@@ -52,12 +58,6 @@ return(
     </Typography>
     <Typography variant="body2">
     Privacy Policy
-    </Typography>
-    </Box>
-    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 1}}>
-    <img src={logoBW} alt="Logo" style={{ height: 40 }} />
-    <Typography variant="body2">
-    copyright {copyright} 2024 | NBC NEWS
     </Typography>
     </Box>
    </Box>

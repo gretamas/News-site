@@ -5,6 +5,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import { Box } from "@mui/material";
 import Navigation from "./Components/Navigation";
 import Header from "./Components/Header";
 import BreakingNews from "./Components/BreakingNews";
@@ -43,6 +44,10 @@ function App() {
     setFullArticle(null);
   };
 
+  function handleThemeChange(){
+
+  }
+
   return (
     <Router>
       <Routes>
@@ -52,9 +57,10 @@ function App() {
           path="/"
           element={
             isLoggedIn ? (
-              <div>
+              <Box>
                 <Navigation
                   handleCategoryClick={handleCategoryClick}
+                  handleThemeChange={handleThemeChange}
                   handleLogOut={handleLogOut}
                   onBack={handleBackToMain}
                 />
@@ -63,13 +69,13 @@ function App() {
                 ) : (
                   <>
                     <BreakingNews onArticleClick={handleFullArticleClick} />
-                    <Header />
+                    <Header onArticleClick={handleFullArticleClick}/>
                     <Main category={category} onArticleClick={handleFullArticleClick}/>
-                    <Picks />
+                    <Picks onArticleClick={handleFullArticleClick}/>
                   </>
                 )}
                 <Footer />
-              </div>
+              </Box>
             ) : (
               <Navigate to="/login" />
             )

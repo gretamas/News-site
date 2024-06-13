@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
-function BreakingNews({onArticleClick}) {
-
+function BreakingNews({ onArticleClick }) {
   const [article, setArticle] = useState("");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -23,33 +25,36 @@ function BreakingNews({onArticleClick}) {
   }, []);
 
   return (
-    
     <Box
       sx={{
-        backgroundColor: 'rgb(192, 20, 20)',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        columnGap: 10,
-        padding: 2
+        backgroundColor: "rgb(192, 20, 20)",
+        color: "white",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: isMobile ? "column" : "row",
+        columnGap: isMobile ? 0 : 10,
+        padding: 2,
+        textAlign: isMobile ? "center" : "left",
       }}
     >
       <Button
         onClick={() => onArticleClick(article)}
         variant="contained"
         sx={{
-          backgroundColor: 'white',
-          color: 'rgb(192, 20, 20)',
-          '&:hover': {
-            backgroundColor: 'white',
-          }
+          backgroundColor: "white",
+          color: "rgb(192, 20, 20)",
+          "&:hover": {
+            backgroundColor: "white",
+          },
+          marginBottom: isMobile ? 2 : 0,
         }}
-      >BREAKING NEWS
+      >
+        BREAKING NEWS
       </Button>
       <Typography variant="body1" gutterBottom>
-              {article.title}
-            </Typography>
+        {article.title}
+      </Typography>
     </Box>
   );
 }

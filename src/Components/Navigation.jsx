@@ -1,6 +1,8 @@
 import React from 'react';
-import { AppBar, Avatar, Menu, MenuItem, ListItemIcon, Divider, IconButton, Tooltip, Container, Box } from '@mui/material';
+import { AppBar, Avatar, Menu, MenuItem, ListItemIcon, Divider, IconButton, Tooltip, Container, Box, Switch} from '@mui/material';
 import { PersonAdd, Settings, Logout, Menu as MenuIcon, Person } from '@mui/icons-material';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import { styled } from '@mui/system';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -21,7 +23,7 @@ const DropdownMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-function Navigation({handleCategoryClick, handleLogOut, onBack}){
+function Navigation({handleCategoryClick, handleThemeChange, handleLogOut, onBack}){
 
   
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -176,6 +178,13 @@ function Navigation({handleCategoryClick, handleLogOut, onBack}){
               <Logout fontSize="small" />
             </ListItemIcon>
             Logout
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <ListItemIcon>
+             <Box>
+              <LightModeOutlinedIcon/><Switch defaultChecked size="small" color="grey" onClick={handleThemeChange}/><DarkModeOutlinedIcon/>
+             </Box>
+            </ListItemIcon>
           </DropdownMenuItem>
         </Menu>
         {/* Main Menu */}

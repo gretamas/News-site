@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, IconButton, Card, CardContent, CardMedia} from '@mui/material';
+import { Box, Typography, IconButton, Card, CardContent, CardMedia, CardActionArea} from '@mui/material';
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 
-function Header() {
+function Header({onArticleClick}) {
   const [article, setArticle] = useState(null);
   const [isFavoriteActive, setIsFavoriteActive] = useState(false);
   const [isBookmarkActive, setIsBookmarkActive] = useState(false);
@@ -48,6 +48,7 @@ function Header() {
       </Box>
       {article && (
         <>
+        <CardActionArea onClick={() => onArticleClick(article)}> 
           <Card>
             <CardContent>
               <Typography variant="h4" gutterBottom>
@@ -72,6 +73,7 @@ function Header() {
               </Box>
             </CardContent>
           </Card>
+          </CardActionArea>
         </>
       )}
     </Box>
