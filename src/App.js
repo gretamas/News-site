@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -21,6 +21,15 @@ function App() {
   const [category, setCategory] = React.useState("sports");
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [fullArticle, setFullArticle] = React.useState(null);
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
+
+  useEffect(() => {
+    document.body.className = isDarkMode ? "dark-mode" : "light-mode";
+  }, [isDarkMode]);
+
+  function handleThemeChange() {
+    setIsDarkMode((prevMode) => !prevMode);
+  }
 
   function handleCategoryClick(newCategory) {
     handleBackToMain();
@@ -44,10 +53,6 @@ function App() {
     setFullArticle(null);
   };
 
-  function handleThemeChange(){
-
-  }
-
   return (
     <Router>
       <Routes>
@@ -61,17 +66,31 @@ function App() {
                 <Navigation
                   handleCategoryClick={handleCategoryClick}
                   handleThemeChange={handleThemeChange}
+                  isDarkMode={isDarkMode}
                   handleLogOut={handleLogOut}
                   onBack={handleBackToMain}
                 />
                 {fullArticle ? (
-                  <FullArticle article={fullArticle} onBack={handleBackToMain} />
+                  <FullArticle
+                    article={fullArticle}
+                    onBack={handleBackToMain}
+                  />
                 ) : (
                   <>
                     <BreakingNews onArticleClick={handleFullArticleClick} />
-                    <Header onArticleClick={handleFullArticleClick}/>
-                    <Main category={category} onArticleClick={handleFullArticleClick}/>
-                    <Picks onArticleClick={handleFullArticleClick}/>
+                    <Header
+                      onArticleClick={handleFullArticleClick}
+                      isDarkMode={isDarkMode}
+                    />
+                    <Main
+                      category={category}
+                      onArticleClick={handleFullArticleClick}
+                      isDarkMode={isDarkMode}
+                    />
+                    <Picks
+                      onArticleClick={handleFullArticleClick}
+                      isDarkMode={isDarkMode}
+                    />
                   </>
                 )}
                 <Footer />

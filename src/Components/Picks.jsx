@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-function Picks({ onArticleClick }) {
+function Picks({ onArticleClick, isDarkMode }) {
 
   let settings = {
       dots: true,
@@ -49,7 +49,7 @@ function Picks({ onArticleClick }) {
   }, []);
 
   return (
-      <Box sx={{ width: '80%', margin: '0 auto' }}>
+      <Box sx={{ width: '80%', margin: '0 auto'}}>
           <Typography variant="h5" gutterBottom>
               Editor's Picks
               <StarIcon />
@@ -57,7 +57,7 @@ function Picks({ onArticleClick }) {
           <Slider {...settings}>
               {articles.map((article, index) => (
                 <CardActionArea onClick={() => onArticleClick(article)}> 
-                  <Card key={index} sx={{ border: 'none', boxShadow: 'none', margin: '10px', backgroundColor: 'transparent' }}>
+                  <Card key={index} sx={{ border: 'none', boxShadow: 'none', margin: '10px', backgroundColor: 'transparent'}}>
                       <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, height: { xs: 'auto', sm: 250 }, width: '100%', overflow: 'hidden', boxShadow: 3 }}>
                           <CardMedia
                               component="img"
@@ -65,11 +65,11 @@ function Picks({ onArticleClick }) {
                               image={article.urlToImage}
                               alt={article.title}
                           />
-                          <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: { xs: '100%', sm: '50%' } }}>
+                          <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: { xs: '100%', sm: '50%' }, color: isDarkMode ? 'white' : 'black'  }}>
                               <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
                                   {article.title}
                               </Typography>
-                              <Typography variant="body2" color="text.secondary">
+                              <Typography variant="body2">
                                   {article.description}
                               </Typography>
                           </CardContent>

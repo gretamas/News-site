@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Box, Typography, IconButton, Card, CardContent, CardMedia, CardActionArea} from '@mui/material';
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
-function Header({onArticleClick}) {
+function Header({onArticleClick, isDarkMode}) {
   const [article, setArticle] = useState(null);
   const [isFavoriteActive, setIsFavoriteActive] = useState(false);
   const [isBookmarkActive, setIsBookmarkActive] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -34,22 +39,38 @@ function Header({onArticleClick}) {
   };
 
   return (
-    <Box sx={{ padding: 10 }}>
+    <Box sx={{ padding: isMobile ? 1 : 10 }}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h5" sx={{ color: 'rgb(192, 20, 20)' }}>Trending</Typography>
+        <Typography variant="h5" sx={{ color: isDarkMode ? 'white' :'rgb(192, 20, 20)'}}>Trending</Typography>
         <Box>
-          <IconButton onClick={handleFavoriteClick}>
-            <FavoriteBorderOutlinedIcon sx={{ color: isFavoriteActive ? 'rgb(192, 20, 20)' : 'inherit' }} />
-          </IconButton>
-          <IconButton onClick={handleBookmarkClick}>
-            <BookmarkBorderOutlinedIcon sx={{ color: isBookmarkActive ? '#cc930e' : 'inherit' }} />
-          </IconButton>
+        <IconButton onClick={handleFavoriteClick}>
+        <FavoriteBorderOutlinedIcon
+          sx={{
+            color: isFavoriteActive 
+              ? 'rgb(192, 20, 20)' 
+              : isDarkMode 
+                ? 'white' 
+                : 'black'
+          }}
+        />
+      </IconButton>
+      <IconButton onClick={handleBookmarkClick}>
+        <BookmarkBorderOutlinedIcon
+          sx={{
+            color: isBookmarkActive 
+              ? '#cc930e' 
+              : isDarkMode 
+                ? 'white' 
+                : 'black'
+          }}
+        />
+      </IconButton>
         </Box>
       </Box>
       {article && (
         <>
         <CardActionArea onClick={() => onArticleClick(article)}> 
-          <Card>
+          <Card sx={{bgcolor: isDarkMode ? '#102a43' : 'white', color: isDarkMode ? 'white' : 'black'}}>
             <CardContent>
               <Typography variant="h4" gutterBottom>
                 {article.title}

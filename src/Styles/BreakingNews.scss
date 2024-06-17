@@ -1,0 +1,36 @@
+.breaking-news-container {
+  background-color: rgb(192, 20, 20);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+
+  &.mobile {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  &.desktop {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 2rem;
+  }
+
+  .breaking-news-title {
+    width: 65vw;
+
+    &.mobile {
+      width: 85vw;
+    }
+  }
+
+  .breaking-news-button {
+    margin: 1rem;
+
+    &.mobile {
+      margin-bottom: 1.2rem;
+    }
+  }
+}

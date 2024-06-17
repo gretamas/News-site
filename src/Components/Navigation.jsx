@@ -9,6 +9,8 @@ import { useTheme } from '@mui/material/styles';
 import { Link as ScrollLink } from 'react-scroll';
 import { Link } from 'react-router-dom';
 import logo from "../images/logo.svg";
+import logoBW from "../images/logoBW.svg";
+import "../Styles/Navigation.css";
 
 const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
   '&:hover': {
@@ -17,17 +19,13 @@ const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-const DropdownMenuItem = styled(MenuItem)(({ theme }) => ({
-  '&:hover': {
-    border: '1px solid rgb(192, 20, 20)',
-  },
-}));
 
-function Navigation({handleCategoryClick, handleThemeChange, handleLogOut, onBack}){
+function Navigation({handleCategoryClick, handleThemeChange, isDarkMode, handleLogOut, onBack}){
 
   
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElMenu, setAnchorElMenu] = React.useState(null);
+  
   
   const openUser = Boolean(anchorElUser);
   const openMenu = Boolean(anchorElMenu);
@@ -59,17 +57,21 @@ function Navigation({handleCategoryClick, handleThemeChange, handleLogOut, onBac
     handleCloseMenu();
   }
 
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: 'white', color: 'black', height: '80px' }}>
+    <AppBar 
+    position="sticky"
+    sx = {{
+      backgroundColor: isDarkMode ? '#0E1E32' : 'white',
+      height: '80px'
+    }}>
       <Container maxWidth="xl" sx={{ height: '100%' }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%' }}>
           <Link onClick={onBack}>
-          <img src={logo} alt="Logo" style={{ height: 40 }} />
+          <img src={isDarkMode ? logoBW : logo} alt="Logo" style={{ height: 40 }} />
           </Link>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             {isMobile ? (
@@ -82,25 +84,25 @@ function Navigation({handleCategoryClick, handleThemeChange, handleLogOut, onBac
                   aria-haspopup="true"
                   aria-expanded={openMenu ? 'true' : undefined}
                 >
-                  <MenuIcon sx={{ height: 18, width: 18 }} />
+                  <MenuIcon sx = {{height: 18, width: 18, color: isDarkMode ? 'white' : 'black'}}/>
                 </IconButton>
               </Tooltip>
             ) : (
-              <>
-                <ScrollLink  to="articles-section" smooth={true} duration={500}>
-                  <CustomMenuItem onClick={() => handleCategoryClick('politics')}>Politics</CustomMenuItem>
+              < >
+                <ScrollLink  to="main-section" smooth={true} duration={500}>
+                  <CustomMenuItem onClick={() => handleCategoryClick('politics')} sx={{color: isDarkMode ? 'white' : 'black'}}>Politics</CustomMenuItem>
                 </ScrollLink>
-                <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <CustomMenuItem onClick={() => handleCategoryClick('business')}>Business</CustomMenuItem>
+                <ScrollLink to="main-section" smooth={true} duration={500}>
+                  <CustomMenuItem onClick={() => handleCategoryClick('business')} sx={{color: isDarkMode ? 'white' : 'black'}}>Business</CustomMenuItem>
                 </ScrollLink>
-                <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <CustomMenuItem onClick={() => handleCategoryClick('sports')}>Sports</CustomMenuItem>
+                <ScrollLink to="main-section" smooth={true} duration={500}>
+                  <CustomMenuItem onClick={() => handleCategoryClick('sports')} sx={{color: isDarkMode ? 'white' : 'black'}}>Sports</CustomMenuItem>
                 </ScrollLink>
-                <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <CustomMenuItem onClick={() => handleCategoryClick('health')}>Health</CustomMenuItem>
+                <ScrollLink to="main-section" smooth={true} duration={500}>
+                  <CustomMenuItem onClick={() => handleCategoryClick('health')} sx={{color: isDarkMode ? 'white' : 'black'}}>Health</CustomMenuItem>
                 </ScrollLink>
-                <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <CustomMenuItem onClick={() => handleCategoryClick('entertainment')}>Entertainment</CustomMenuItem>
+                <ScrollLink to="main-section" smooth={true} duration={500}>
+                  <CustomMenuItem onClick={() => handleCategoryClick('entertainment')} sx={{color: isDarkMode ? 'white' : 'black'}}>Entertainment</CustomMenuItem>
                 </ScrollLink>
               </>
             )}
@@ -113,7 +115,7 @@ function Navigation({handleCategoryClick, handleThemeChange, handleLogOut, onBac
                 aria-haspopup="true"
                 aria-expanded={openUser ? 'true' : undefined}
               >
-                <Person sx={{ height: 18, width: 18 }} />
+                <Person sx = {{height: 18, width: 18, color: isDarkMode ? 'white' : 'black'}}/>
               </IconButton>
             </Tooltip>
           </Box>
@@ -157,35 +159,35 @@ function Navigation({handleCategoryClick, handleThemeChange, handleLogOut, onBac
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <DropdownMenuItem onClick={handleCloseUser}>
+          <MenuItem onClick={handleCloseUser}>
             <Avatar /> My account
-          </DropdownMenuItem>
+          </MenuItem>
           <Divider />
-          <DropdownMenuItem component={Link} to="/signup" onClick={handleCloseUser}>
+          <MenuItem component={Link} to="/signup" onClick={handleCloseUser}>
             <ListItemIcon>
               <PersonAdd fontSize="small" />
             </ListItemIcon>
             Add another account
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleCloseUser}>
+          </MenuItem>
+          <MenuItem onClick={handleCloseUser}>
             <ListItemIcon>
               <Settings fontSize="small" />
             </ListItemIcon>
             Settings
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleLogOutBtn}>
+          </MenuItem>
+          <MenuItem onClick={handleLogOutBtn}>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
             Logout
-          </DropdownMenuItem>
-          <DropdownMenuItem>
+          </MenuItem>
+          <MenuItem>
             <ListItemIcon>
-             <Box>
-              <LightModeOutlinedIcon/><Switch defaultChecked size="small" color="grey" onClick={handleThemeChange}/><DarkModeOutlinedIcon/>
+             <Box className='navigation-theme-switch-box '>
+              <LightModeOutlinedIcon/><Switch size="small" color="grey" className='navigation-mode-switch'defaultChecked checked={isDarkMode} onClick={handleThemeChange}/><DarkModeOutlinedIcon/>
              </Box>
             </ListItemIcon>
-          </DropdownMenuItem>
+          </MenuItem>
         </Menu>
         {/* Main Menu */}
         <Menu
@@ -219,20 +221,20 @@ function Navigation({handleCategoryClick, handleThemeChange, handleLogOut, onBac
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <DropdownMenuItem onClick={() => handleDropDownMenu('politics')}>Politics</DropdownMenuItem>
+          <ScrollLink to="main-section" smooth={true} duration={500}>
+                  <MenuItem onClick={() => handleDropDownMenu('politics')}>Politics</MenuItem>
                 </ScrollLink>
-                <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <DropdownMenuItem onClick={() => handleDropDownMenu('business')}>Business</DropdownMenuItem>
+                <ScrollLink to="main-section" smooth={true} duration={500}>
+                  <MenuItem onClick={() => handleDropDownMenu('business')}>Business</MenuItem>
                 </ScrollLink>
-                <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <DropdownMenuItem onClick={() => handleDropDownMenu('sports')}>Sports</DropdownMenuItem>
+                <ScrollLink to="main-section" smooth={true} duration={500}>
+                  <MenuItem onClick={() => handleDropDownMenu('sports')}>Sports</MenuItem>
                 </ScrollLink>
-                <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <DropdownMenuItem onClick={() => handleDropDownMenu('health')}>Health</DropdownMenuItem>
+                <ScrollLink to="main-section" smooth={true} duration={500}>
+                  <MenuItem onClick={() => handleDropDownMenu('health')}>Health</MenuItem>
                 </ScrollLink>
-                <ScrollLink to="articles-section" smooth={true} duration={500}>
-                  <DropdownMenuItem onClick={() => handleDropDownMenu('entertainment')}>Entertainment</DropdownMenuItem>
+                <ScrollLink to="main-section" smooth={true} duration={500}>
+                  <MenuItem onClick={() => handleDropDownMenu('entertainment')}>Entertainment</MenuItem>
                 </ScrollLink>
         </Menu>
       </Container>

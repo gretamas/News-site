@@ -1,67 +1,57 @@
-import { Box, IconButton, Typography } from "@mui/material";
 import React from "react";
-import logoBW from "../images/logoBW.svg";
+import { Box, IconButton, Link, Typography } from "@mui/material";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import logoBW from "../images/logoBW.svg";
+import '../Styles/Footer.css';
 
-
-function Footer (){
-
-  const copyright = String.fromCodePoint(169);
-
+function Footer() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-return(
-   <Box
-   mt={10}
-   sx={{
-    height: isMobile ? 300 : 250,
-    backgroundColor: '#0E1E32',
-    color: 'white',
-    display: 'flex',
-    flexDirection: isMobile ? 'column' : 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    columnGap: isMobile ? 0 : 10,
-    rowGap: isMobile ? 3 : 0,
-    padding: 2
-  }}>
-    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 1}}>
-    <img src={logoBW} alt="Logo" style={{ height: 40 }} />
-    <Typography variant="body2">
-    copyright {copyright} 2024 | NBC NEWS
-    </Typography>
-    </Box>
-    <Box>
-        <Box sx={{display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'center' : 'space-around', columnGap: 2}}>
-    <Typography>About Us</Typography>
-    <Typography>Contacts</Typography>
-    <Typography>Careers</Typography>
-    <Typography>Coupons</Typography>
+  return (
+    <Box className={`footer-container ${isMobile ? 'mobile' : ''}`}>
+      <Box className="footer-section">
+        <img src={logoBW} alt="Logo" className="footer-logo" />
+        <Typography variant="body2">
+          &copy; 2024 | NBC NEWS
+        </Typography>
+      </Box>
+      <Box className="footer-section">
+        <Box className="footer-links">
+          <Link href="#about-us" underline="none" sx={{ color: 'white', '&:hover': { color: '#c31815', transform: 'scale(1.1)'}}}>About Us</Link>
+          <Link href="#contacts" underline="none" sx={{ color: 'white', '&:hover': { color: '#c31815', transform: 'scale(1.1)'}}}>Contacts</Link>
+          <Link href="#careers"  underline="none" sx={{ color: 'white', '&:hover': { color: '#c31815', transform: 'scale(1.1)'}}}>Careers</Link>
+          <Link href="#coupons"  underline="none" sx={{ color: 'white', '&:hover': { color: '#c31815', transform: 'scale(1.1)'}}}>Coupons</Link>
         </Box>
-        <Box sx={{display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'center' : 'space-around', padding: 2}}>
-    <IconButton sx={{color: 'white'}}><TwitterIcon/></IconButton>
-    <IconButton sx={{color: 'white'}}><FacebookIcon/></IconButton>
-    <IconButton sx={{color: 'white'}}><InstagramIcon/></IconButton>
+        <Box className="footer-social">
+          <Link href="https://twitter.com" target="_blank" >
+            <IconButton sx={{ color: 'white', '&:hover': { color: '#c31815', transform: 'scale(1.1)' } }}>
+              <TwitterIcon />
+            </IconButton>
+          </Link>
+          <Link href="https://facebook.com" target="_blank" >
+            <IconButton sx={{ color: 'white', '&:hover': { color: '#c31815', transform: 'scale(1.1)' } }}>
+              <FacebookIcon />
+            </IconButton>
+          </Link>
+          <Link href="https://instagram.com" target="_blank">
+            <IconButton sx={{ color: 'white', '&:hover': { color: '#c31815', transform: 'scale(1.1)' } }}>
+              <InstagramIcon />
+            </IconButton>
+          </Link>
         </Box>
+      </Box>
+      <Box className="footer-section">
+        <Link href="#privacy-policy" underline="none" sx={{ color: 'white', '&:hover': { color: '#c31815', transform: 'scale(1.1)'}}}>Privacy Policy</Link>
+        <Link href="#terms-of-service" underline="none" sx={{ color: 'white', '&:hover': { color: '#c31815', transform: 'scale(1.1)'}}}>Terms of Service</Link>
+        <Link href="#privacy-policy" underline="none" sx={{ color: 'white', '&:hover': { color: '#c31815', transform: 'scale(1.1)'}}}>Privacy Policy</Link>
+      </Box>
     </Box>
-    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: isMobile ? 'center' : 'flex-start', rowGap: 1}}>
-    <Typography variant="body2">
-    Privacy Policy
-    </Typography>
-    <Typography variant="body2">
-    Terms of Service
-    </Typography>
-    <Typography variant="body2">
-    Privacy Policy
-    </Typography>
-    </Box>
-   </Box>
-)
+  );
 }
 
 export default Footer;

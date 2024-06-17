@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import "../Styles/Main.css"
 
 
-function Main({category, onArticleClick}){
+function Main({category, onArticleClick, isDarkMode}){
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [location, setLocation] = useState('');
@@ -17,9 +17,11 @@ function Main({category, onArticleClick}){
       };
 
     return(
-     <Box id="articles-section" className = {isMobile ? "main-section--mobile" : "main-section"}>
-<Articles location={location} category={category} onArticleClick={onArticleClick} className="main-section__articles"/>
-<LocationNews onLocationChange={handleLocationChange} className="main-section__location-input"/>
+      <Box id="main-section" className='main-section-container'>
+     <Box className = {isMobile ? "main-section--mobile" : "main-section"}>
+<Articles location={location} category={category} onArticleClick={onArticleClick} isDarkMode={isDarkMode} className="main-section__articles"/>
+<LocationNews onLocationChange={handleLocationChange} isDarkMode={isDarkMode} className="main-section__location-input"/>
+     </Box>
      </Box>
     )
 }

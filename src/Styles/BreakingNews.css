@@ -1,0 +1,30 @@
+.breaking-news-container {
+  background-color: rgb(192, 20, 20);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.breaking-news-container.mobile {
+  flex-direction: column;
+  text-align: center;
+  gap: 1rem;
+}
+.breaking-news-container.desktop {
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 2rem;
+}
+.breaking-news-container .breaking-news-title {
+  width: 65vw;
+}
+.breaking-news-container .breaking-news-title.mobile {
+  width: 85vw;
+}
+.breaking-news-container .breaking-news-button {
+  margin: 1rem;
+}
+.breaking-news-container .breaking-news-button.mobile {
+  margin-bottom: 1.2rem;
+}/*# sourceMappingURL=BreakingNews.css.map */

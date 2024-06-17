@@ -1,0 +1,11 @@
+.articles-container {
+  max-width: 700px;
+  margin: 0px 25px 25px;
+}
+
+.load-more-btn:hover {
+  border-color: #c31815;
+  background-color: #f6e7e7;
+  color: #c31815;
+  transform: scale(1.05);
+}/*# sourceMappingURL=Articles.css.map */

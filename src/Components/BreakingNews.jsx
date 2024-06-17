@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import '../Styles/BreakingNews.css';
 
 function BreakingNews({ onArticleClick }) {
   const [article, setArticle] = useState("");
@@ -25,21 +26,10 @@ function BreakingNews({ onArticleClick }) {
   }, []);
 
   return (
-    <Box
-      sx={{
-        backgroundColor: "rgb(192, 20, 20)",
-        color: "white",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: isMobile ? "column" : "row",
-        columnGap: isMobile ? 0 : 10,
-        padding: 2,
-        textAlign: isMobile ? "center" : "left",
-      }}
-    >
+    <Box className={`breaking-news-container ${isMobile ? 'mobile' : ''}`}>
       <Button
         onClick={() => onArticleClick(article)}
+        className="breaking-news-button"
         variant="contained"
         sx={{
           backgroundColor: "white",
@@ -47,12 +37,11 @@ function BreakingNews({ onArticleClick }) {
           "&:hover": {
             backgroundColor: "white",
           },
-          marginBottom: isMobile ? 2 : 0,
         }}
       >
         BREAKING NEWS
       </Button>
-      <Typography variant="body1" gutterBottom>
+      <Typography className="breaking-news-title" variant="body1" gutterBottom>
         {article.title}
       </Typography>
     </Box>
