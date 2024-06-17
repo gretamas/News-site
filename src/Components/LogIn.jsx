@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Container, Typography, TextField, FormControlLabel, Button, Grid, Link, CssBaseline, Checkbox } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.svg";
@@ -16,18 +16,42 @@ function Copyright(props) {
   );
 }
 
-function LogIn({ handleLogIn }) {
+function LogIn({ handleLogIn, isDarkMode}) {
   const navigate = useNavigate();
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    handleLogIn();
-    navigate("/");
+    const email = data.get('email');
+    const password = data.get('password');
+
+    if (!email || !validateEmail(email)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+
+    if (!password) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+
+    if (email && validateEmail(email) && password) {
+      console.log({
+        email: email,
+        password: password,
+      });
+      handleLogIn();
+      navigate("/");
+    }
   };
 
   return (
@@ -55,6 +79,32 @@ function LogIn({ handleLogIn }) {
             name="email"
             autoComplete="email"
             autoFocus
+            error={emailError}
+            helperText={emailError ? "Please enter a valid email address" : ""}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                backgroundColor: 'transparent',
+                '& fieldset': {
+                  borderColor:  'black',
+                },
+                '&:hover fieldset': {
+                  borderColor: 'black',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor:  'black',
+                },
+              },
+              '& .MuiInputLabel-root': {
+                color: 'black',
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: 'black',
+              },
+              '& .MuiOutlinedInput-input': {
+                color:  'black',
+                backgroundColor: 'transparent',
+              },
+            }}
           />
           <TextField
             margin="normal"
@@ -65,6 +115,32 @@ function LogIn({ handleLogIn }) {
             type="password"
             id="password"
             autoComplete="current-password"
+            error={passwordError}
+            helperText={passwordError ? "Password is required" : ""}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                backgroundColor: 'transparent',
+                '& fieldset': {
+                  borderColor:  'black',
+                },
+                '&:hover fieldset': {
+                  borderColor:  'black',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor:  'black',
+                },
+              },
+              '& .MuiInputLabel-root': {
+                color:  'black',
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color:  'black',
+              },
+              '& .MuiOutlinedInput-input': {
+                color:  'black',
+                backgroundColor: 'transparent',
+              },
+            }}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" sx={{
@@ -88,19 +164,19 @@ function LogIn({ handleLogIn }) {
                 backgroundColor: '#f6e7e7',
                 color: '#c31815',
                 transform: 'scale(1.05)'
-              }
+              } 
             }}
           >
             Log In
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2" sx={{ color: 'black' }}>
+              <Link href="#" variant="body2" sx={{ color: isDarkMode? 'white' : 'black' }}>
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/signup" variant="body2" sx={{ color: 'black' }}>
+              <Link href="/signup" variant="body2" sx={{ color: isDarkMode? 'white' : 'black' }}>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
