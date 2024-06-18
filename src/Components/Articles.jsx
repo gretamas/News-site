@@ -12,7 +12,7 @@ function Articles({ location, category, onArticleClick, isDarkMode}) {
     const fetchArticles = async () => {
       try {
         const countryCode = Object.keys(countryCodes).find(code => countryCodes[code].toLowerCase() === location.toLowerCase()) || 'us';
-        const url = `https://newsapi.org/v2/top-headlines?country=${countryCode}&category=${category}&apiKey=9862bae58a22497ca87e41257767dff4`;
+        const url = `https://newsapi.org/v2/top-headlines?country=${countryCode}&category=${category}&apiKey=7828a72879be4399b0995f0c785c1c60`;
         const response = await fetch(url);
         const data = await response.json();
         if (data?.articles?.length) {

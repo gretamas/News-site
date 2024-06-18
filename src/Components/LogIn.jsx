@@ -45,10 +45,6 @@ function LogIn({ handleLogIn, isDarkMode}) {
     }
 
     if (email && validateEmail(email) && password) {
-      console.log({
-        email: email,
-        password: password,
-      });
       handleLogIn();
       navigate("/");
     }

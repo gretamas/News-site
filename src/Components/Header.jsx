@@ -18,7 +18,7 @@ function Header({onArticleClick, isDarkMode}) {
     const fetchArticle = async () => {
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=9862bae58a22497ca87e41257767dff4`
+          `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=7828a72879be4399b0995f0c785c1c60`
         );
         const data = await response.json();
         if (data?.articles?.length) {

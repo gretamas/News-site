@@ -52,7 +52,6 @@ function App() {
   }
 
   function handleLogIn() {
-    console.log("Login successful");
     setIsLoggedIn(true);
   }
 
