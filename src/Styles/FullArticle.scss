@@ -1,11 +1,32 @@
 .full-article-section {
   .full-article__background {
-    height: 410px;
     background-color: #0e1e32;
     z-index: 0;
   }
-  .full-article__subtitle{
+  .full-article__subtitle {
     border-top: 1px solid #c31815;
     border-bottom: 1px solid #c31815;
+  }
+
+  .full-article-image-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0px;
+
+    .full-article-image {
+      margin: 25px 0px;
+      height: 300px;
+      width: 550px;
+    }
+
+    .full-article-image-comment {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60vw;
+      column-gap: 10px;
+    }
   }
 }

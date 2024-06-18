@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -15,17 +15,32 @@ import Picks from "./Components/Picks";
 import FullArticle from "./Components/FullArticle";
 import LogIn from "./Components/LogIn";
 import SignUp from "./Components/SignUp";
+import logo from "./images/logo.svg";
 import "./Styles/App.css";
 
 function App() {
-  const [category, setCategory] = React.useState("sports");
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [fullArticle, setFullArticle] = React.useState(null);
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const [category, setCategory] = useState("business");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [fullArticle, setFullArticle] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showLogo, setShowLogo] = useState(false);
 
   useEffect(() => {
     document.body.className = isDarkMode ? "dark-mode" : "light-mode";
   }, [isDarkMode]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setShowLogo(true);
+
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      setIsLoading(false);
+      setShowLogo(false);
+    };
+
+    fetchData();
+  }, []);
 
   function handleThemeChange() {
     setIsDarkMode((prevMode) => !prevMode);
@@ -43,6 +58,7 @@ function App() {
 
   function handleLogOut() {
     setIsLoggedIn(false);
+    setShowLogo(false);
   }
 
   function handleFullArticleClick(article) {
@@ -62,39 +78,53 @@ function App() {
           path="/"
           element={
             isLoggedIn ? (
-              <Box>
-                <Navigation
-                  handleCategoryClick={handleCategoryClick}
-                  handleThemeChange={handleThemeChange}
-                  isDarkMode={isDarkMode}
-                  handleLogOut={handleLogOut}
-                  onBack={handleBackToMain}
-                />
-                {fullArticle ? (
-                  <FullArticle
-                    article={fullArticle}
+              isLoading ? (
+                showLogo ? (
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    height="100vh"
+                  >
+                    <img src={logo} alt="Site Logo" />
+                  </Box>
+                ) : null
+              ) : (
+                <Box>
+                  <Navigation
+                    handleCategoryClick={handleCategoryClick}
+                    handleThemeChange={handleThemeChange}
+                    isDarkMode={isDarkMode}
+                    handleLogOut={handleLogOut}
                     onBack={handleBackToMain}
                   />
-                ) : (
-                  <>
-                    <BreakingNews onArticleClick={handleFullArticleClick} />
-                    <Header
-                      onArticleClick={handleFullArticleClick}
+                  {fullArticle ? (
+                    <FullArticle
+                      article={fullArticle}
+                      onBack={handleBackToMain}
                       isDarkMode={isDarkMode}
                     />
-                    <Main
-                      category={category}
-                      onArticleClick={handleFullArticleClick}
-                      isDarkMode={isDarkMode}
-                    />
-                    <Picks
-                      onArticleClick={handleFullArticleClick}
-                      isDarkMode={isDarkMode}
-                    />
-                  </>
-                )}
-                <Footer />
-              </Box>
+                  ) : (
+                    <>
+                      <BreakingNews onArticleClick={handleFullArticleClick} />
+                      <Header
+                        onArticleClick={handleFullArticleClick}
+                        isDarkMode={isDarkMode}
+                      />
+                      <Main
+                        category={category}
+                        onArticleClick={handleFullArticleClick}
+                        isDarkMode={isDarkMode}
+                      />
+                      <Picks
+                        onArticleClick={handleFullArticleClick}
+                        isDarkMode={isDarkMode}
+                      />
+                    </>
+                  )}
+                  <Footer />
+                </Box>
+              )
             ) : (
               <Navigate to="/login" />
             )

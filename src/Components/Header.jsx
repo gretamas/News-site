@@ -3,6 +3,7 @@ import { Box, Typography, IconButton, Card, CardContent, CardMedia, CardActionAr
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import useMediaQuery from '@mui/material/useMediaQuery';
+import moment from 'moment';
 import { useTheme } from '@mui/material/styles';
 
 function Header({onArticleClick, isDarkMode}) {
@@ -17,7 +18,7 @@ function Header({onArticleClick, isDarkMode}) {
     const fetchArticle = async () => {
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=e1bef1f913474c1b9baf0a58a4147a5d`
+          `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=9862bae58a22497ca87e41257767dff4`
         );
         const data = await response.json();
         if (data?.articles?.length) {
@@ -89,7 +90,7 @@ function Header({onArticleClick, isDarkMode}) {
               <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Typography variant="body2">{article.author}</Typography>
                 <Typography variant="body2">
-                  {new Date(article.publishedAt).toLocaleDateString()}
+                  {moment(article.publishedAt).fromNow()}
                 </Typography>
               </Box>
             </CardContent>

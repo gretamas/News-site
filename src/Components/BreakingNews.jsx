@@ -12,7 +12,7 @@ function BreakingNews({ onArticleClick }) {
     const fetchArticle = async () => {
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=us&apiKey=e1bef1f913474c1b9baf0a58a4147a5d`
+          `https://newsapi.org/v2/top-headlines?country=us&apiKey=9862bae58a22497ca87e41257767dff4`
         );
         const data = await response.json();
         if (data?.articles?.length) {
@@ -27,6 +27,9 @@ function BreakingNews({ onArticleClick }) {
 
   return (
     <Box className={`breaking-news-container ${isMobile ? 'mobile' : ''}`}>
+      <Typography className="breaking-news-title" variant="body1" gutterBottom>
+        {article.title}
+      </Typography>
       <Button
         onClick={() => onArticleClick(article)}
         className="breaking-news-button"
@@ -41,9 +44,6 @@ function BreakingNews({ onArticleClick }) {
       >
         BREAKING NEWS
       </Button>
-      <Typography className="breaking-news-title" variant="body1" gutterBottom>
-        {article.title}
-      </Typography>
     </Box>
   );
 }

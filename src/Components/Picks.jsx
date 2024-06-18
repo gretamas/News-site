@@ -33,7 +33,7 @@ function Picks({ onArticleClick, isDarkMode }) {
   const fetchArticles = async () => {
       try {
           const response = await fetch(
-              `https://newsapi.org/v2/everything?q=trendy&apiKey=e1bef1f913474c1b9baf0a58a4147a5d`
+              `https://newsapi.org/v2/everything?q=trendy&apiKey=9862bae58a22497ca87e41257767dff4`
           );
           const data = await response.json();
           if (data?.articles?.length) {
