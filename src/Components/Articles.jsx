@@ -7,12 +7,13 @@ import "../Styles/Articles.css";
 function Articles({ location, category, onArticleClick, isDarkMode}) {
   const [articles, setArticles] = useState([]);
   const [displayCount, setDisplayCount] = useState(4);
+  const proxyUrl = "https://cors-anywhere.herokuapp.com/"
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         const countryCode = Object.keys(countryCodes).find(code => countryCodes[code].toLowerCase() === location.toLowerCase()) || 'us';
-        const url = `https://newsapi.org/v2/top-headlines?country=${countryCode}&category=${category}&apiKey=7828a72879be4399b0995f0c785c1c60`;
+        const url = `${proxyUrl}https://newsapi.org/v2/top-headlines?country=${countryCode}&category=${category}&apiKey=7828a72879be4399b0995f0c785c1c60`;
         const response = await fetch(url);
         const data = await response.json();
         if (data?.articles?.length) {

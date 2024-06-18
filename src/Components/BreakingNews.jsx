@@ -7,12 +7,13 @@ function BreakingNews({ onArticleClick }) {
   const [article, setArticle] = useState("");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const proxyUrl = "https://cors-anywhere.herokuapp.com/"
 
   useEffect(() => {
     const fetchArticle = async () => {
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=us&apiKey=7828a72879be4399b0995f0c785c1c60`
+          `${proxyUrl}https://newsapi.org/v2/top-headlines?country=us&apiKey=7828a72879be4399b0995f0c785c1c60`
         );
         const data = await response.json();
         if (data?.articles?.length) {

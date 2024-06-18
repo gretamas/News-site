@@ -4,7 +4,7 @@ import StarIcon from '@mui/icons-material/Star';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+const proxyUrl = "https://cors-anywhere.herokuapp.com/"
 
 function Picks({ onArticleClick, isDarkMode }) {
 
@@ -33,7 +33,7 @@ function Picks({ onArticleClick, isDarkMode }) {
   const fetchArticles = async () => {
       try {
           const response = await fetch(
-              `https://newsapi.org/v2/everything?q=trendy&apiKey=7828a72879be4399b0995f0c785c1c60`
+              `${proxyUrl}https://newsapi.org/v2/everything?q=trendy&apiKey=7828a72879be4399b0995f0c785c1c60`
           );
           const data = await response.json();
           if (data?.articles?.length) {

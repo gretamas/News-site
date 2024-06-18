@@ -10,6 +10,7 @@ function Header({onArticleClick, isDarkMode}) {
   const [article, setArticle] = useState(null);
   const [isFavoriteActive, setIsFavoriteActive] = useState(false);
   const [isBookmarkActive, setIsBookmarkActive] = useState(false);
+  const proxyUrl = "https://cors-anywhere.herokuapp.com/"
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -18,7 +19,7 @@ function Header({onArticleClick, isDarkMode}) {
     const fetchArticle = async () => {
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=7828a72879be4399b0995f0c785c1c60`
+          `${proxyUrl}https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=7828a72879be4399b0995f0c785c1c60`
         );
         const data = await response.json();
         if (data?.articles?.length) {
